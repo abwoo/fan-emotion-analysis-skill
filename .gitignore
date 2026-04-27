@@ -1,0 +1,7 @@
+# Ignore private references
+references/
+*.md
+
+# Keep only public files
+!README.md
+!public-skill.md
