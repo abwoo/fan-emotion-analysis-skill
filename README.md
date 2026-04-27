@@ -4,8 +4,19 @@
 [![GitHub Stars](https://img.shields.io/github/stars/abwoo/fan-emotion-analysis-skill?style=social)](https://github.com/abwoo/fan-emotion-analysis-skill/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/abwoo/fan-emotion-analysis-skill)](https://github.com/abwoo/fan-emotion-analysis-skill/issues)
 [![Skill Framework](https://img.shields.io/badge/Skill-Dual%20Layer%20Architecture-orange)](https://github.com/abwoo/fan-emotion-analysis-skill)
+[![Release](https://img.shields.io/github/v/release/abwoo/fan-emotion-analysis-skill)](https://github.com/abwoo/fan-emotion-analysis-skill/releases)
 
-> 一个实用的情感分析与关系处理工具 — 用户可获得完整体验，核心规则内容受保护
+**一个即插即用的AI Skill，装上就能获得1000+小时实战积累的情感分析能力。3步安装，零配置，用中文提问就行。**
+
+> 开源透明 + 核心内容保护 = 你能用完整功能，但看不到底层规则原文
+
+| 对比 | 普通AI聊天 | 本项目 |
+|------|-----------|--------|
+| 知识来源 | AI通用知识 | 1000+小时实战积累的44个专项规则 |
+| 分析深度 | 泛泛而谈 | 五步分析法 + 终局判决 |
+| 多人追踪 | 容易搞混 | 自动人物关系图谱 |
+| 离线可用 | 不行 | 内置兜底框架 |
+| 安装难度 | — | 下载→放入目录→提问 |
 
 ## 目录
 
@@ -22,7 +33,7 @@
 
 ## 这是什么
 
-这是一个经过实战验证的情感分析工具。它不是纸上谈兵的理论，而是一套可以直接拿去用的实战方法论。
+这是一个经过实战验证的情感分析AI Skill。它不是纸上谈兵的理论，而是一套可以直接拿去用的实战方法论——相当于你身边有个见过太多的人，直接跟你说实话。
 
 它能帮你：
 - 分析当前局势，判断真实状况
