@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#fb923c"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#4ade80"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#f87171"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" rx="12"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="800" height="40" fill="#1c2128" rx="12"/>
+  <rect x="0" y="12" width="800" height="28" fill="#1c2128"/>
+  <circle cx="24" cy="20" r="6" fill="#f85149"/>
+  <circle cx="44" cy="20" r="6" fill="#d29922"/>
+  <circle cx="64" cy="20" r="6" fill="#3fb950"/>
+  <text x="400" y="25" text-anchor="middle" fill="#8b949e" font-family="monospace" font-size="13">AI Skill - 情感分析技术流</text>
+
+  <!-- User question bubble -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0.5s" dur="0.3s" fill="freeze"/>
+    <rect x="40" y="60" width="380" height="52" rx="12" fill="#1c3a5e" stroke="#388bfd" stroke-width="1"/>
+    <text x="56" y="82" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">你</text>
+    <text x="56" y="100" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="13">我同事小A约不出来，还要继续吗？</text>
+  </g>
+
+  <!-- AI thinking indicator -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.5s" dur="0.3s" fill="freeze"/>
+    <animate attributeName="opacity" from="1" to="0" begin="3s" dur="0.3s" fill="freeze"/>
+    <rect x="40" y="125" width="120" height="32" rx="10" fill="#2d1b0e" stroke="#f97316" stroke-width="1"/>
+    <text x="56" y="146" fill="#f97316" font-family="monospace" font-size="12">分析中</text>
+    <circle cx="120" cy="141" r="3" fill="#f97316">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="132" cy="141" r="3" fill="#f97316">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="144" cy="141" r="3" fill="#f97316">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- AI response - conclusion -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="0.3s" fill="freeze"/>
+    <rect x="40" y="125" width="720" height="44" rx="10" fill="#1a1a2e" stroke="#f97316" stroke-width="1"/>
+    <text x="56" y="147" fill="#f97316" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">AI分析</text>
+    <text x="110" y="147" fill="#f0f6fc" font-family="system-ui,sans-serif" font-size="13" font-weight="bold">结论：小A对你有兴趣但邀约时机不对 → 先收线，看她反应</text>
+    <text x="56" y="163" fill="#8b949e" font-family="system-ui,sans-serif" font-size="11">调用规则：聊天体系 + 邀约推进 + 核心认知</text>
+  </g>
+
+  <!-- Analysis table -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="4.5s" dur="0.3s" fill="freeze"/>
+
+    <!-- Table header -->
+    <rect x="40" y="180" width="720" height="26" rx="6" fill="#21262d"/>
+    <text x="56" y="198" fill="#8b949e" font-family="monospace" font-size="11">信号</text>
+    <text x="240" y="198" fill="#8b949e" font-family="monospace" font-size="11">判断</text>
+    <text x="540" y="198" fill="#8b949e" font-family="monospace" font-size="11">档位</text>
+
+    <!-- Row 1 -->
+    <rect x="40" y="206" width="720" height="24" fill="#0d1117"/>
+    <text x="56" y="222" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">主动找你聊天</text>
+    <text x="240" y="222" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">有兴趣，愿意投入时间</text>
+    <rect x="540" y="210" width="48" height="16" rx="4" fill="#0d3320"/>
+    <text x="552" y="222" fill="#3fb950" font-family="monospace" font-size="11">绿灯</text>
+
+    <!-- Row 2 -->
+    <rect x="40" y="230" width="720" height="24" fill="#161b22"/>
+    <text x="56" y="246" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">约她她说"再看吧"</text>
+    <text x="240" y="246" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">软拒，当量可能不够</text>
+    <rect x="540" y="234" width="48" height="16" rx="4" fill="#3d2e00"/>
+    <text x="552" y="246" fill="#d29922" font-family="monospace" font-size="11">黄灯</text>
+
+    <!-- Row 3 -->
+    <rect x="40" y="254" width="720" height="24" fill="#0d1117"/>
+    <text x="56" y="270" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">从不主动约你</text>
+    <text x="240" y="270" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="12">你目前是备选位</text>
+    <rect x="540" y="258" width="48" height="16" rx="4" fill="#3d1a1a"/>
+    <text x="552" y="270" fill="#f85149" font-family="monospace" font-size="11">红灯</text>
+  </g>
+
+  <!-- Action suggestion -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="5.5s" dur="0.3s" fill="freeze"/>
+    <rect x="40" y="290" width="720" height="56" rx="10" fill="#0d2818" stroke="#22c55e" stroke-width="1"/>
+    <text x="56" y="310" fill="#4ade80" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">下一步动作</text>
+    <text x="56" y="330" fill="#c9d1d9" font-family="system-ui,sans-serif" font-size="13">停止邀约 → 高价值离场："行，你先忙你的，等你闲了再说 👋"</text>
+  </g>
+
+  <!-- Verdict -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="6.5s" dur="0.5s" fill="freeze"/>
+    <rect x="40" y="360" width="720" height="40" rx="10" fill="#0d3320" stroke="url(#green)" stroke-width="2" filter="url(#glow)"/>
+    <text x="400" y="385" text-anchor="middle" fill="#4ade80" font-family="system-ui,sans-serif" font-size="16" font-weight="bold">⚡ 终局判决：继续 — 先收线，看她反应</text>
+  </g>
+
+  <!-- Bottom stats bar -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="7s" dur="0.5s" fill="freeze"/>
+    <rect x="40" y="415" width="170" height="24" rx="6" fill="#21262d"/>
+    <text x="56" y="432" fill="#8b949e" font-family="monospace" font-size="11">44条专项规则</text>
+
+    <rect x="225" y="415" width="170" height="24" rx="6" fill="#21262d"/>
+    <text x="241" y="432" fill="#8b949e" font-family="monospace" font-size="11">8大分析模块</text>
+
+    <rect x="410" y="415" width="170" height="24" rx="6" fill="#21262d"/>
+    <text x="426" y="432" fill="#8b949e" font-family="monospace" font-size="11">3步装好即用</text>
+
+    <rect x="595" y="415" width="165" height="24" rx="6" fill="#21262d"/>
+    <text x="611" y="432" fill="#8b949e" font-family="monospace" font-size="11">零配置·中文</text>
+  </g>
+</svg>
