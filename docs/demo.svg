@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <style>
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes typeIn { from { width: 0; } to { width: 100%; } }
+      .q-line { opacity: 0; animation: fadeIn 0.4s ease forwards; }
+      .a-line { opacity: 0; animation: fadeIn 0.4s ease forwards; }
+      .d1 { animation-delay: 0.3s; }
+      .d2 { animation-delay: 0.7s; }
+      .d3 { animation-delay: 1.1s; }
+      .d4 { animation-delay: 1.8s; }
+      .d5 { animation-delay: 2.2s; }
+      .d6 { animation-delay: 2.6s; }
+      .d7 { animation-delay: 3.0s; }
+      .d8 { animation-delay: 3.4s; }
+      .d9 { animation-delay: 3.8s; }
+      .cursor-blink { animation: blink 0.8s step-end infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <rect width="800" height="420" fill="#f8f9fa" rx="16"/>
+
+  <rect x="30" y="20" width="740" height="380" fill="#ffffff" rx="12" stroke="#e1e4e8" stroke-width="1"/>
+
+  <rect x="30" y="20" width="740" height="40" fill="#f1f3f5" rx="12"/>
+  <rect x="30" y="48" width="740" height="12" fill="#f1f3f5"/>
+  <circle cx="56" cy="40" r="7" fill="#ff5f57"/>
+  <circle cx="78" cy="40" r="7" fill="#febc2e"/>
+  <circle cx="100" cy="40" r="7" fill="#28c840"/>
+  <text x="400" y="44" text-anchor="middle" fill="#8b949e" font-family="system-ui,sans-serif" font-size="13">AI 情感分析</text>
+
+  <rect x="50" y="75" width="50" height="22" fill="#e8f5e9" rx="4"/>
+  <text x="75" y="91" text-anchor="middle" fill="#2e7d32" font-family="system-ui,sans-serif" font-size="12" font-weight="600">用户</text>
+
+  <text class="q-line d1" x="115" y="91" fill="#24292f" font-family="system-ui,sans-serif" font-size="14">我同事小A，6分，会主动找我聊，</text>
+  <text class="q-line d2" x="115" y="113" fill="#24292f" font-family="system-ui,sans-serif" font-size="14">但约她总说忙。还要继续吗？</text>
+
+  <line x1="50" y1="130" x2="750" y2="130" stroke="#f0f0f0" stroke-width="1"/>
+
+  <rect x="50" y="142" width="50" height="22" fill="#e3f2fd" rx="4"/>
+  <text x="75" y="158" text-anchor="middle" fill="#1565c0" font-family="system-ui,sans-serif" font-size="12" font-weight="600">AI</text>
+
+  <text class="a-line d4" x="115" y="158" fill="#24292f" font-family="system-ui,sans-serif" font-size="14" font-weight="600">兴趣判断：黄灯区</text>
+
+  <text class="a-line d5" x="115" y="183" fill="#57606a" font-family="system-ui,sans-serif" font-size="13">主动找你聊 = 有基本兴趣</text>
+  <text class="a-line d6" x="115" y="205" fill="#57606a" font-family="system-ui,sans-serif" font-size="13">但约不出来 = 当量不够，不是没兴趣</text>
+
+  <text class="a-line d7" x="115" y="232" fill="#24292f" font-family="system-ui,sans-serif" font-size="13" font-weight="600">下一步：</text>
+  <text class="a-line d7" x="115" y="254" fill="#57606a" font-family="system-ui,sans-serif" font-size="13">1. 停止邀约，先累当量（转语音）</text>
+  <text class="a-line d8" x="115" y="276" fill="#57606a" font-family="system-ui,sans-serif" font-size="13">2. 2次语音后再次邀约，给具体方案</text>
+
+  <rect x="110" y="296" width="640" height="36" fill="#fff3e0" rx="6" stroke="#ff9800" stroke-width="1" stroke-dasharray="4,2"/>
+  <text class="a-line d9" x="125" y="319" fill="#e65100" font-family="system-ui,sans-serif" font-size="14" font-weight="700">终局判决：继续，但换打法。别再干约了。</text>
+
+  <text class="cursor-blink" x="680" y="319" fill="#e65100" font-family="monospace" font-size="14">▌</text>
+
+  <rect x="50" y="348" width="700" height="36" fill="#f8f9fa" rx="6"/>
+  <text x="70" y="370" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">追踪表：小A | 6分 | 国女 | 黄灯 | 下一步→累当量转语音</text>
+</svg>
