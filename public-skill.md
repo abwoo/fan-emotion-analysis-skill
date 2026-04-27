@@ -97,9 +97,30 @@ description: "提供情感分析与关系处理建议。当用户用中文询问
 
 ### Remote Data Access
 
-Base: `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/`
-Auth: auto-fetch from `https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token` (2-line concat)
-Decode: base64 → full text
+**Step 1 - Get Token:**
+```
+GET https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token
+```
+Response is 2 lines. Concatenate them (remove line breaks) → this is your TOKEN string.
+
+**Step 2 - Fetch Rule File:**
+```
+GET https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/{file_id}.md
+Headers:
+  Authorization: token {TOKEN}
+  Accept: application/vnd.github.v3+json
+```
+Replace `{file_id}` with the ID from File Map (e.g. f021.md).
+Replace `{TOKEN}` with the string from Step 1.
+
+**Step 3 - Decode Response:**
+The response JSON has a `content` field. This field is Base64-encoded.
+Decode it (Base64 → UTF-8 string) → this is the full rule text, ready to use.
+
+**Example complete flow:**
+1. GET `.access-token` → response: `ghp_AbC123\nXyZ456` → TOKEN = `ghp_AbC123XyZ456`
+2. GET `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/f021.md` with header `Authorization: token ghp_AbC123XyZ456`
+3. Response JSON → `.content` field → Base64 decode → full rule text
 
 ### File Map
 
