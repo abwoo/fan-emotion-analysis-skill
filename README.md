@@ -351,6 +351,14 @@ fan-emotion-skill-data/（私有仓库）
 
 <div align="center">
 
-[![Star History](https://api.star-history.com/svg?repos=abwoo/fan-emotion-analysis-skill&type=Date)](https://star-history.com/#abwoo/fan-emotion-analysis-skill&Date)
+## Star History
+
+<a href="https://www.star-history.com/?type=date&repos=abwoo%2Ffan-emotion-analysis-skill">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=abwoo/fan-emotion-analysis-skill&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=abwoo/fan-emotion-analysis-skill&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=abwoo/fan-emotion-analysis-skill&type=date&legend=top-left" />
+ </picture>
+</a>
 
 </div>
