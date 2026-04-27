@@ -15,12 +15,12 @@
 
 ---
 
-<img src="https://img.shields.io/badge/规则-44条专项-orange?style=flat-square"/>
-<img src="https://img.shields.io/badge/模块-8大分析-green?style=flat-square"/>
-<img src="https://img.shields.io/badge/安装-3步即用-blue?style=flat-square"/>
-<img src="https://img.shields.io/badge/语言-中文-brightgreen?style=flat-square"/>
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/abwoo/fan-emotion-analysis-skill?style=social)](https://github.com/abwoo/fan-emotion-analysis-skill/stargazers)
+<img src="https://img.shields.io/badge/规则-44条专项-orange?style=flat-square" alt="44 Rules"/>
+<img src="https://img.shields.io/badge/模块-8大分析-green?style=flat-square" alt="8 Modules"/>
+<img src="https://img.shields.io/badge/安装-3步即用-blue?style=flat-square" alt="3 Steps"/>
+<img src="https://img.shields.io/badge/语言-中文-brightgreen?style=flat-square" alt="Chinese"/>
+<img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="MIT"/>
+<img src="https://img.shields.io/github/stars/abwoo/fan-emotion-analysis-skill?style=flat-square" alt="Stars"/>
 
 </div>
 
