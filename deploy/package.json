@@ -1,0 +1,6 @@
+{
+  "name": "emotion-analysis-skill-api",
+  "version": "1.0.0",
+  "description": "API service for emotion analysis skill",
+  "private": true
+}
