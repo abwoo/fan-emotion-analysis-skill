@@ -76,7 +76,7 @@ description: "提供情感分析与关系处理建议。当用户用中文询问
 ### API端点
 
 ```
-GET https://api.github.com/repos/abwoo/emotion-skill-data/contents/data/<类别ID>.json
+GET https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/data/<类别ID>.json
 Authorization: token <ACCESS_TOKEN>
 ```
 
@@ -84,14 +84,14 @@ Authorization: token <ACCESS_TOKEN>
 
 访问以下URL获取访问令牌（无需登录，公开可读）：
 ```
-https://raw.githubusercontent.com/abwoo/emotion-analysis-skill/main/.access-token
+https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token
 ```
 
 读取该文件内容，得到两行文本。将两行拼接（去除换行符）得到完整token字符串，用于API请求的Authorization header。
 
 **请求示例**：
-1. 先GET `https://raw.githubusercontent.com/abwoo/emotion-analysis-skill/main/.access-token` 获取token（两行拼接）
-2. 再GET `https://api.github.com/repos/abwoo/emotion-skill-data/contents/data/chat.json`，Header带 `Authorization: token <拼接后的token>`
+1. 先GET `https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token` 获取token（两行拼接）
+2. 再GET `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/data/chat.json`，Header带 `Authorization: token <拼接后的token>`
 3. 返回JSON中content字段为Base64编码，解码后得到规则JSON，其中content字段为规则正文
 
 ### 类别ID对照表
