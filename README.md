@@ -225,24 +225,63 @@ Skill会自动为每个人物创建追踪表，包括：
 
 ```
 公开仓库 (fan-emotion-analysis-skill)
-├── public-skill.md     ← Skill文件（工作流+决策框架+兜底逻辑+人物追踪）
+├── public-skill.md     ← Skill文件（工作流+决策框架+兜底逻辑+人物追踪+44文件路由）
 ├── .access-token       ← API访问令牌
 ├── README.md           ← 本文档
 └── .gitignore
 
-私有仓库 (fan-emotion-skill-data)  ← 规则数据（受保护）
+私有仓库 (fan-emotion-skill-data)  ← 规则数据（受保护，完整原文）
 └── data/
-    ├── core.json          ← 核心认知与底层框架
-    ├── female_type.json   ← 女性分类与对应策略
-    ├── top_beauty.json    ← 顶美类型与追求策略
-    ├── female_score.json  ← 颜值评分与难度评估
-    ├── chat.json          ← 聊天体系与话题库
-    ├── delivery.json      ← 关系推进与邀约方法
-    ├── date.json          ← 约会执行全流程
-    └── attraction.json    ← 吸引力构建与展示
+    ├── A组：核心认知
+    │   ├── core.json                ← 核心认知与底层框架
+    │   ├── skill_main.json          ← 完整技能框架（SKILL.md原文）
+    │   └── original_front_core.json ← 原文开头核心内容
+    ├── B组：女性识别体系
+    │   ├── female_type.json                ← 女性分类
+    │   ├── female_score.json               ← 颜值评分
+    │   ├── top_beauty.json                 ← 顶美策略
+    │   ├── laonv.json                      ← 捞女四分类
+    │   ├── female_cheat_risk.json          ← 出轨风险识别
+    │   └── male_classification_female_ver.json ← 女性视角男性分类
+    ├── C组：男性自我建设
+    │   ├── attraction.json       ← 吸引力构建
+    │   ├── course_resource.json  ← 课程资源12个月计划
+    │   └── male_classification.json ← 男性五分类
+    ├── D组：聊天系统
+    │   ├── chat.json                ← 聊天3.0体系
+    │   ├── chat_post_approach.json  ← 搭讪后续聊天
+    │   ├── chat_date_full.json      ← 聊天约会全流程（24个IOI）
+    │   └── delivery.json            ← 外卖方法3.0
+    ├── E组：约会执行系统
+    │   ├── date.json      ← 约会加速器
+    │   └── one_date.json  ← 一约得吃完整版
+    ├── F组：长期关系与特殊场景
+    │   ├── long_term.json  ← 长期关系经营
+    │   ├── class_guide.json ← 各阶层脱单指南
+    │   └── nightlife.json   ← 夜场攻略与城市选择
+    ├── G组：原文课程（Part 1-3完整原文）
+    │   ├── original_case_index.json ← 案例索引
+    │   ├── original_review.json     ← Part 1 观后感
+    │   ├── original_part2_a~d.json  ← Part 2 正课（4个文件）
+    │   └── original_part3_a~c.json  ← Part 3 案例（3个文件）
+    └── H组：视频逐字转写库（14个文件）
+        ├── video_index.json              ← 视频库总入口
+        ├── video_china_beauty.json       ← 中国正妹劣根性
+        ├── video_live_voice.json         ← 直播语音
+        ├── video_refill.json             ← 续杯方法
+        ├── video_delivery_challenge.json ← 外卖员挑战
+        ├── video_delivery_practice.json  ← 外卖小哥实践
+        ├── video_global.json             ← 全球泡妞
+        ├── video_laonv.json              ← 捞女四大分类
+        ├── video_guonan3.json            ← 国男三宗罪
+        ├── video_guonan7.json            ← 国男七宗罪
+        ├── video_high_level.json         ← 高段位看两性
+        ├── video_programmer.json         ← 程序员脱单
+        ├── video_rich_woman.json         ← 把富婆
+        └── video_reveal.json             ← 把妹揭秘
 ```
 
-AI在回答问题时，会根据用户的问题类型自动调用对应的规则模块，将深度规则转化为自然的对话语言输出。用户只需提问，不需要关心底层调用逻辑。
+共44个规则文件，全部为完整原文内容（非摘要）。AI在回答问题时，会根据用户的问题类型自动路由到对应的规则文件，将深度规则转化为自然的对话语言输出。用户只需提问，不需要关心底层调用逻辑。
 
 ## 免责声明
 
