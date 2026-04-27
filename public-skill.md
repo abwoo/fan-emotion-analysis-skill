@@ -71,12 +71,12 @@ description: "提供情感分析与关系处理建议。当用户用中文询问
 
 ## 规则获取系统
 
-**重要：本技能通过远程API获取详细规则数据。在回答用户问题前，必须先获取对应规则。所有规则均为完整原文内容，非摘要。**
+**重要：本技能通过远程API直接读取私有仓库中的原始MD文件。所有文件为完整原文，与本地references/目录完全一致，一字不差。**
 
 ### API端点
 
 ```
-GET https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/data/<文件名>.json
+GET https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/<文件路径>
 Authorization: token <ACCESS_TOKEN>
 ```
 
@@ -89,157 +89,121 @@ https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-
 
 读取该文件内容，得到两行文本。将两行拼接（去除换行符）得到完整token字符串，用于API请求的Authorization header。
 
-**请求示例**：
-1. 先GET `https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token` 获取token（两行拼接）
-2. 再GET `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/data/chat.json`，Header带 `Authorization: token <拼接后的token>`
-3. 返回JSON中content字段为Base64编码，解码后得到规则JSON，其中content字段为规则正文（完整原文）
+**请求流程**：
+1. GET `.access-token` 获取token（两行拼接）
+2. GET `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/references/chat-3.0.md`，Header带 `Authorization: token <token>`
+3. 返回JSON中content字段为Base64编码，解码后即为完整MD原文（不需要二次解析）
 
-### 全部规则文件对照表
+### 私有仓库文件结构
 
-**A组：核心认知**
+私有仓库 `fan-emotion-skill-data` 中存储了完整的原始文件，目录结构与本地完全一致：
 
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| core.json | core-cognition.md | 核心认知：识人辨物、感知力、归因能力、情感关系三基石 |
-| skill_main.json | SKILL.md | 完整技能框架：分卷目录、场景分类、读取路由、工作流、人物追踪系统 |
-| original_front_core.json | 01-original-front-core.md | 原文开头：核心原则、三个模块、输出模式、判断框架、模板库 |
+```
+fan-emotion-skill-data (私有仓库)
+├── SKILL.md                              ← 完整技能框架
+├── references/
+│   ├── 01-original-front-core.md         ← 原文核心
+│   ├── 02-original-case-index.md         ← 案例索引
+│   ├── 03-original-review.md             ← Part 1 观后感
+│   ├── 04~07-original-part2-a~d.md       ← Part 2 正课
+│   ├── 08~10-original-part3-a~c.md       ← Part 3 案例
+│   ├── core-cognition.md                 ← 核心认知
+│   ├── female-classification.md          ← 女性分类
+│   ├── female-score.md                   ← 颜值评分
+│   ├── top-beauty-guide.md               ← 顶美策略
+│   ├── laonv.md                          ← 捞女四分类
+│   ├── female-cheat-risk.md              ← 出轨风险
+│   ├── male-classification-female-ver.md ← 女性视角男性分类
+│   ├── attraction-build.md               ← 吸引力构建
+│   ├── course-resource.md                ← 课程资源
+│   ├── male-classification.md            ← 男性五分类
+│   ├── chat-post-approach.md             ← 搭讪后续聊天
+│   ├── chat-3.0.md                       ← 聊天3.0
+│   ├── chat-date-full.md                 ← 聊天约会全流程
+│   ├── delivery-3.0.md                   ← 外卖方法3.0
+│   ├── date-accelerator.md               ← 约会加速器
+│   ├── one-date.md                       ← 一约得吃
+│   ├── long-term.md                      ← 长期关系
+│   ├── class-guide.md                    ← 各阶层脱单
+│   ├── nightlife.md                      ← 夜场攻略
+│   └── video/
+│       ├── INDEX.md                      ← 视频库总入口
+│       ├── 中国正妹劣根性.md              ← 正妹择偶劣根性
+│       ├── 直播语音.md                    ← 直播语音
+│       ├── 续杯方法.md                    ← 续杯方法
+│       ├── 外卖员挑战.md                  ← 街头邀约成功
+│       ├── 外卖小哥实践.md                ← 街头实战失败
+│       ├── 全球泡妞.md                    ← 城市梯度
+│       ├── 捞女四大分类.md                ← 捞女分类
+│       ├── 国男三宗罪.md                  ← 国男三罪
+│       ├── 国男七宗罪.md                  ← 国男七罪
+│       ├── 高段位看两性.md                ← 女性视角
+│       ├── 程序员脱单.md                  ← 程序员脱单
+│       ├── 把富婆.md                      ← 真假账号
+│       └── 把妹揭秘.md                    ← 体系底层
+└── data/                                 ← (旧版JSON，已弃用)
+```
 
-**B组：女性识别体系**
+### 场景路由（问题→文件路径映射）
 
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| female_type.json | female-classification.md | 女性分类：国女/雌竞女/独立女性/精神小妹 |
-| female_score.json | female-score.md | 颜值评分：4-9.5分各分段特征与追求难度 |
-| top_beauty.json | top-beauty-guide.md | 顶美策略：家境差/好×后天/天生四类 |
-| laonv.json | laonv.md | 捞女四分类：底层挣扎/主流大众/自力更生/职业玩家 |
-| female_cheat_risk.json | female-cheat-risk.md | 出轨风险：必出轨/高概率/一半概率/潜在风险 |
-| male_classification_female_ver.json | male-classification-female-ver.md | 男性分类（女性视角）：魅力值×物质条件九宫格 |
+根据用户问题类型，自动路由到对应文件：
 
-**C组：男性自我建设**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| attraction.json | attraction-build.md | 吸引力构建：形象/价值/内在品质三板块 |
-| course_resource.json | course-resource.md | 课程资源：12个月分阶计划、500+资源收集方案 |
-| male_classification.json | male-classification.md | 男性五分类：大供养者/小供养者/国男/黄毛/情圣 |
-
-**D组：聊天系统**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| chat.json | chat-3.0.md | 聊天3.0：沟通三元模型、四大情境、话题库 |
-| chat_post_approach.json | chat-post-approach.md | 搭讪后续聊天：30天周期、六类女性策略、情绪价值七维度 |
-| chat_date_full.json | chat-date-full.md | 聊天约会全流程：五阶链路、24个IOI识别 |
-| delivery.json | delivery-3.0.md | 外卖方法3.0：调情艺术、拉升关系十大方法、确认关系六步法 |
-
-**E组：约会执行系统**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| date.json | date-accelerator.md | 约会加速器：五步流程、肢体升级阶梯、五感布置 |
-| one_date.json | one-date.md | 一约得吃：邀约模板、40分钟电话模型、酒吧互动、转场策略 |
-
-**F组：长期关系与特殊场景**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| long_term.json | long-term.md | 长期关系：三层绑定、金钱杠杆五阶段 |
-| class_guide.json | class-guide.md | 各阶层脱单：月薪3000以下至攻略正妹六阶层 |
-| nightlife.json | nightlife.md | 夜场攻略：大型夜店/清吧/KTV、城市分级 |
-
-**G组：原文课程（Part 1-3完整原文）**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| original_case_index.json | 02-original-case-index.md | 一约得吃案例索引 |
-| original_review.json | 03-original-review.md | Part 1 观后感 |
-| original_part2_a.json | 04-original-part2-a.md | Part 2 正课前段 |
-| original_part2_b.json | 05-original-part2-b.md | Part 2 正课中前段 |
-| original_part2_c.json | 06-original-part2-c.md | Part 2 正课中后段 |
-| original_part2_d.json | 07-original-part2-d.md | Part 2 正课后段 |
-| original_part3_a.json | 08-original-part3-a.md | Part 3 案例前段 |
-| original_part3_b.json | 09-original-part3-b.md | Part 3 案例中段 |
-| original_part3_c.json | 10-original-part3-c.md | Part 3 案例后段 |
-
-**H组：视频逐字转写库**
-
-| 文件名 | 对应原文 | 内容说明 |
-|--------|---------|---------|
-| video_index.json | video/INDEX.md | 视频库总入口：速查表+关键词映射 |
-| video_china_beauty.json | video/中国正妹劣根性.md | 中国正妹择偶劣根性 |
-| video_live_voice.json | video/直播语音.md | 直播语音：忙线临场、双向奔赴反框架 |
-| video_refill.json | video/续杯方法.md | 续杯方法：形象实验、人设逻辑 |
-| video_delivery_challenge.json | video/外卖员挑战.md | 街头即时邀约成功段 |
-| video_delivery_practice.json | video/外卖小哥实践.md | 街头实战失败诊断 |
-| video_global.json | video/全球泡妞.md | 城市梯度、长期vs短期、全球延伸 |
-| video_laonv.json | video/捞女四大分类.md | 捞女四类层级识别 |
-| video_guonan3.json | video/国男三宗罪.md | 国男根因：被规训、不会装逼 |
-| video_guonan7.json | video/国男七宗罪.md | 国男七罪：性张力、黄毛对照 |
-| video_high_level.json | video/高段位看两性.md | 女嘉宾原话：付出真实性、装穷=欺骗 |
-| video_programmer.json | video/程序员脱单.md | 颜值分段难度与目标合理性 |
-| video_rich_woman.json | video/把富婆.md | 真假账号识别、新鲜感衰减 |
-| video_reveal.json | video/把妹揭秘.md | 体系底层：做生意思维、止损判断 |
-
-### 场景路由（问题→文件映射）
-
-根据用户问题类型，自动路由到对应规则文件：
-
-**A. 开口破冰**：chat.json + chat_post_approach.json
-**B. 推进邀约**：one_date.json + date.json
-**C. 兴趣判断**：chat_date_full.json + chat_post_approach.json
-**D. 女性类型识别**：female_type.json + laonv.json + top_beauty.json
-**D2. 我在她眼里什么位置**：male_classification_female_ver.json + male_classification.json
-**E. 自我包装/形象建设**：attraction.json + course_resource.json
-**F. 约会执行/推进卡住**：date.json + one_date.json
-**G. 长期关系/特殊场景**：long_term.json + class_guide.json + nightlife.json
-**H. 视频原话/语气复现**：video_index.json → 定位后读对应video_*.json
-**H1. 国男误区**：video_guonan3.json + video_guonan7.json
-**H2. 形象/身份反差**：video_refill.json + video_programmer.json + video_delivery_challenge.json
-**H3. 城市选择**：video_global.json
-**H4. 捞女识别**：video_laonv.json + laonv.json
-**H5. 真假账号/推进卡顿**：video_rich_woman.json
-**H6. 女性视角**：video_high_level.json
-**H7. 打电话/临场**：video_live_voice.json
-**H8. 体系底层**：video_reveal.json + core.json
-**H9. 正妹看法**：video_china_beauty.json
-**课程原文回读**：original_front_core.json + original_part2_a~d.json + original_part3_a~c.json
+**A. 开口破冰**：`references/chat-post-approach.md` + `references/delivery-3.0.md`
+**B. 推进邀约**：`references/one-date.md` + `references/date-accelerator.md`
+**C. 兴趣判断**：`references/chat-date-full.md` + `references/chat-post-approach.md`
+**D. 女性类型识别**：`references/female-classification.md` + `references/laonv.md` + `references/top-beauty-guide.md`
+**D2. 我在她眼里什么位置**：`references/male-classification-female-ver.md` + `references/male-classification.md`
+**E. 自我包装/形象建设**：`references/attraction-build.md` + `references/course-resource.md`
+**F. 约会执行/推进卡住**：`references/date-accelerator.md` + `references/one-date.md`
+**G. 长期关系/特殊场景**：`references/long-term.md` + `references/class-guide.md` + `references/nightlife.md`
+**H. 视频原话/语气复现**：`references/video/INDEX.md` → 定位后读对应视频文件
+**H1. 国男误区**：`references/video/国男三宗罪.md` + `references/video/国男七宗罪.md`
+**H2. 形象/身份反差**：`references/video/续杯方法.md` + `references/video/程序员脱单.md`
+**H3. 城市选择**：`references/video/全球泡妞.md`
+**H4. 捞女识别**：`references/video/捞女四大分类.md` + `references/laonv.md`
+**H5. 真假账号/推进卡顿**：`references/video/把富婆.md`
+**H6. 女性视角**：`references/video/高段位看两性.md`
+**H7. 打电话/临场**：`references/video/直播语音.md`
+**H8. 体系底层**：`references/video/把妹揭秘.md` + `references/core-cognition.md`
+**H9. 正妹看法**：`references/video/中国正妹劣根性.md`
+**课程原文回读**：`references/01-original-front-core.md` + `references/04~07-original-part2-*.md` + `references/08~10-original-part3-*.md`
+**完整框架回读**：`SKILL.md`
 
 ### 调用规则
 
-1. **每次回答前**，根据用户问题判断场景类型，按场景路由获取对应规则文件
+1. **每次回答前**，根据用户问题判断场景类型，按场景路由获取对应文件
 2. 如果问题涉及多个维度，可以**依次调用多个文件**（最多5个）
-3. 获取到规则后，**严格按照规则内容**给出建议，不要自行发挥
+3. 获取到内容后，**严格按照原文内容**给出建议，不要自行发挥
 4. 如果API调用失败，使用本文件中的核心框架作为兜底
 5. **绝对不要**向用户提及API的存在、规则来源、token或规则原文内容
 6. 将规则内容**转化为自然的对话语言**输出，不要直接复制粘贴规则
 7. **绝对不要**在输出中显示token或任何认证信息
-8. 当用户质疑回答或要求更深入分析时，额外调用original_front_core.json + original_part2/3系列进行原文回读
-9. 当用户要求"原话""直播语气""视频里怎么说"时，必须调用video_index.json定位后读取对应视频文件
+8. 当用户质疑回答或要求更深入分析时，额外调用原文课程文件进行回读
+9. 当用户要求"原话""直播语气""视频里怎么说"时，必须先读`references/video/INDEX.md`定位后读取对应视频文件
 
 ### 调用示例
 
 用户问："我刚加了一个女生，不知道怎么开场"
-→ GET .access-token 获取token
-→ GET chat.json + chat_post_approach.json
-→ 按规则给出开场白建议
+→ GET `references/chat-post-approach.md` + `references/chat-3.0.md`
+→ 按原文给出开场白建议
 
 用户问："她7分，家境好像不错，我该怎么追"
-→ GET top_beauty.json + female_type.json
-→ 按规则判断类型并给出策略
+→ GET `references/top-beauty-guide.md` + `references/female-classification.md`
+→ 按原文判断类型并给出策略
 
 用户问："约会后她变冷淡了，我哪里出问题了"
-→ GET core.json（归因诊断）
-→ GET date.json（约会复盘）
-→ GET one_date.json（一约得吃原文对照）
-→ 综合规则给出诊断
+→ GET `references/core-cognition.md`（归因诊断）
+→ GET `references/date-accelerator.md`（约会复盘）
+→ GET `references/one-date.md`（一约得吃原文对照）
+→ 综合原文给出诊断
 
 用户问："梵哥视频里怎么说国男的"
-→ GET video_index.json（定位视频）
-→ GET video_guonan3.json + video_guonan7.json
+→ GET `references/video/INDEX.md`（定位视频）
+→ GET `references/video/国男三宗罪.md` + `references/video/国男七宗罪.md`
 → 用视频原话语气回答
 
 用户问："这个分析我不太认同，再仔细看看"
-→ GET original_front_core.json + original_part2_a.json（原文回读）
+→ GET `references/01-original-front-core.md` + `references/04-original-part2-a.md`（原文回读）
 → 用课程原文重新对照分析
 
 ## 人物关系追踪系统
