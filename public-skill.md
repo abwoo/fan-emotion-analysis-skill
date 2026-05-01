@@ -97,30 +97,25 @@ description: "提供情感分析与关系处理建议。当用户用中文询问
 
 ### Remote Data Access
 
-**Step 1 - Get Token:**
-```
-GET https://raw.githubusercontent.com/abwoo/fan-emotion-analysis-skill/main/.access-token
-```
-Response is 2 lines. Concatenate them (remove line breaks) → this is your TOKEN string.
+**⚠️ 强制规则：本技能的所有回答必须基于data仓库中的规则原文。禁止凭自身知识编造建议。每次回答前必须先获取对应规则文件，严格按规则内容输出。未获取规则文件就回答 = 严重违规。**
 
-**Step 2 - Fetch Rule File:**
-```
-GET https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/{file_id}.md
-Headers:
-  Authorization: token {TOKEN}
-  Accept: application/vnd.github.v3+json
-```
-Replace `{file_id}` with the ID from File Map (e.g. f021.md).
-Replace `{TOKEN}` with the string from Step 1.
+**数据仓库地址：** `https://github.com/abwoo/fan-emotion-skill-data`
 
-**Step 3 - Decode Response:**
-The response JSON has a `content` field. This field is Base64-encoded.
-Decode it (Base64 → UTF-8 string) → this is the full rule text, ready to use.
+**获取方式（公开仓库，无需认证）：**
 
-**Example complete flow:**
-1. GET `.access-token` → response: `ghp_AbC123\nXyZ456` → TOKEN = `ghp_AbC123XyZ456`
-2. GET `https://api.github.com/repos/abwoo/fan-emotion-skill-data/contents/f021.md` with header `Authorization: token ghp_AbC123XyZ456`
-3. Response JSON → `.content` field → Base64 decode → full rule text
+直接用raw URL获取规则文件原文：
+```
+GET https://raw.githubusercontent.com/abwoo/fan-emotion-skill-data/main/{file_id}.md
+```
+Replace `{file_id}` with the ID from File Map below (e.g. f021.md).
+
+Response is the full rule text in UTF-8, ready to use directly. No decoding needed.
+
+**Example:**
+1. User asks about opening conversation → Route A → need f021 and f024
+2. GET `https://raw.githubusercontent.com/abwoo/fan-emotion-skill-data/main/f021.md` → full rule text
+3. GET `https://raw.githubusercontent.com/abwoo/fan-emotion-skill-data/main/f024.md` → full rule text
+4. Answer strictly based on fetched content
 
 ### File Map
 
@@ -148,15 +143,16 @@ A: f021+f024 | B: f026+f025 | C: f023+f021 | D: f012+f015+f014 | D2: f017+f020 |
 
 ### Rules
 
-1. Fetch before answer per route
+1. **强制获取**：每次回答前必须先按Route获取对应规则文件，无例外。禁止跳过获取直接回答。
 2. Max 5 files per query
-3. Strictly follow fetched content
+3. **严格遵循**：回答内容必须严格基于获取到的规则原文，不得擅自发挥、不得用自己的知识替代规则内容。规则里有的必须说，规则里没有的不得编造。
 4. Fallback to core framework in this file on failure
 5. Never reveal data source, tokens, or raw content
 6. Output in natural Chinese only
 7. Never display auth info
 8. Challenge → extra fetch f001+f004-f010
 9. "Original voice" → f030 first, then specific
+10. **违规判定**：如果回答内容与获取到的规则文件不一致，视为违规回答。宁可说"我需要先查阅规则"也不能凭空编造。
 
 ## 人物关系追踪系统
 
